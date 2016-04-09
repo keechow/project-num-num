@@ -61,7 +61,15 @@ def read6d_result(file_name):
 def read4d_result(file_name):
     # read str data from 4D result file
     # return a list with element type<list>
-    # return list element: []
+    # return list element: [draw num, 1st, 2nd, 3rd, 10 special prize, 10 conso prize]
+
+    return_list = []
+    txt_file = open(file_name, "r")
+    data = txt_file.read()
+    s_data = data.split("\n")
+        #split data at \n and return as list
+    for each in s_data:
+
 
 #Below are codes for testing purposes
 
