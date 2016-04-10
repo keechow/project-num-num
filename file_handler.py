@@ -69,13 +69,14 @@ def read4d_result(file_name):
     s_data = data.split("\n")
         #split data at \n and return as list
     for each in s_data:
-
+        each_strip = each[7:-1] # we don't want draw no. and the last string \r
+        return_list.append(each_strip.split(","))
+    return return_list
 
 #Below are codes for testing purposes
 
-data = read6d_result("6D.txt")
-
-print data[:10]
+data = read4d_result("4D.txt")
+print data[:3]
 print "========== end =========="
 
 
