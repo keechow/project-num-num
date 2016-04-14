@@ -74,11 +74,11 @@ def read4d_result(file_name):
     return return_list
 
 #Below are codes for testing purposes
-
+"""
 data = read4d_result("4D.txt")
 print data[:3]
 print "========== end =========="
-
+"""
 
 
 
