@@ -1,0 +1,9 @@
+1. File handler to read data from downloaded txt file.
+    - 6d, 5d, 4d : all done
+
+2. Data separator to separate sets of data according to month
+    - all done for 4,5,6d
+
+3. We have to start counting process
+    - for 5D, we start by separate num range into 10k each
+        - check and match the first digit, then count
