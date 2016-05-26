@@ -48,6 +48,8 @@ def match(num_list, data):
 
 from file_handler import read5d_result_w_draw_no
 
+file_5d = open("5D_result_repeat.txt", 'w')
+
 data_5d = read5d_result_w_draw_no("5D.txt")
 
 result_list = num_generator_5d()
@@ -61,7 +63,7 @@ for each_draw in data_5d:
 
 for each_num in result_list:
 	if len(each_num) > 1:
+		file_5d.write(str(each_num))
+		file_5d.write("\n")
 		print each_num
 		print
-
-
