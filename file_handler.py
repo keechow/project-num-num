@@ -73,6 +73,20 @@ def read4d_result(file_name):
         return_list.append(each_strip.split(","))
     return return_list
 
+def read5d_result_w_draw_no(file_name):
+    # read str data from 5D result file
+    # return a list with element type<list>
+    # return list element: [draw date, 1st prize, 2nd prize, 3rd prize]
+
+    return_list = []
+    txt_file = open(file_name, "r")
+    data = txt_file.read()
+    s_data= data.split("\n")
+            #split data at \n and return as list
+    for each in s_data:
+        each_s_data = each[:-1]    #we don't want the last string \r
+        return_list.append(each_s_data.split(","))
+    return return_list
 #Below are codes for testing purposes
 """
 data = read4d_result("4D.txt")
