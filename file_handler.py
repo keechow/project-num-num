@@ -83,17 +83,18 @@ def read5d_result_w_draw_no(file_name):
     data = txt_file.read()
     s_data= data.split("\n")
             #split data at \n and return as list
+
     for each in s_data:
-        each_s_data = each[:-1]    #we don't want the last string \r
-        return_list.append(each_s_data.split(","))
+        return_list.append(each.split(","))
     return return_list
+
 #Below are codes for testing purposes
 """
-data = read4d_result("4D.txt")
-print data[:3]
+data = read5d_result_w_draw_no("5D_result.txt")
+print data
 print "========== end =========="
-"""
 
+"""
 
 
 

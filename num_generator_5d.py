@@ -18,6 +18,18 @@ def generate_5d_num():
 		counter += 1
 	return num5d_list
 
+def generate_5d_numrange(range):
+	num5d_list = []
+	counter = range
+	while counter < (range + 10000):
+		str_num = str(counter)
+		if len(str_num) < 5:
+			while len(str_num) < 5:
+				str_num = "0" + str_num
+		num5d_list.append(str_num)
+		counter += 1
+	return num5d_list
+
 def generate_5d_num_cat():
 	num5d_list = generate_5d_num()
 	i1 = []
