@@ -1,5 +1,5 @@
-__author__ = 'keechow'
 import matplotlib.pyplot as plt
+
 from file_handler import read5d_result_w_draw_no as read5d
 
 x_elements = []

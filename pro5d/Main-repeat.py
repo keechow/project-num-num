@@ -10,13 +10,6 @@ __author__ = 'keechow'
 
 # example of data stream:   040792,19920506,26094,21292,47699
 
-from file_handler import read4d_result
-from file_handler import read5d_result
-from file_handler import read6d_result
-from separate_by_month import separate_4d
-from separate_by_month import separate_5d
-from separate_by_month import separate_6d
-
 def num_generator_5d():
 	#generate 00000 to 99999
     return_list = []

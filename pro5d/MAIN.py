@@ -1,7 +1,6 @@
 __author__ = 'keechow'
 
-from collections import Counter
-    # this is a subclass of dictionary
+# this is a subclass of dictionary
 	# from collections import Counter
 	#     A = Counter({'a':1, 'b':2, 'c':3})
 	#     B = Counter({'b':3, 'c':4, 'd':5})
