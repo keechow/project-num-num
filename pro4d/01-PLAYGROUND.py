@@ -7,3 +7,7 @@ data = read("4D.txt")
 print len(data)
 
 print na.gen_num()
+
+#hello
+
+#hahaha
