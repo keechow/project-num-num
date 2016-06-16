@@ -1,13 +1,27 @@
-# 1) need file handler to read results from data file
-
 from file_handler import read
 import num_analysis as na
 
-data = read("4D.txt")
-print len(data)
+all_num = na.gen_num()
+result = read("4D.txt")
+latest_result = read("4D-latest.txt")
 
-print na.gen_num()
+# generate 3 list for 1st prize, 2nd prize, 3rd prize numbers drawn for 2013, 2014, 2015, 2016
 
-#hello
+prize1 = []
+prize2 = []
+prize3 = []
 
-#hahaha
+for each_draw in result:
+	year = each_draw[0][-2:]
+	p1 = each_draw[2]
+	p2 = each_draw[3]
+	p3 = each_draw[4]
+	if year == "13" or year == "14" or year == "15" or year == "16":
+		prize1.append(p1)
+		prize2.append(p2)
+		prize3.append(p3)
+
+print len(prize1)
+print len(prize2)
+print len(prize3)
+
