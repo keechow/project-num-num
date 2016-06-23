@@ -1,3 +1,8 @@
+"""
+Name: calc_recurrence_123.py
+Objectives: Calculate recurrence of previously drawn Prize 1,2,3 nums
+
+"""
 from file_handler import read
 import num_analysis as na
 
