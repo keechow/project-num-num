@@ -3,6 +3,7 @@ Name: num_analysis.py
 Objective:  1. Generate numbers from 0000 to 9999
             2. Separate each number to different category - i24, i12, i6, i4
             3. Allow user to get a list of these numbers
+            4. Various methods for users to manipulate 4D nums
 Params: None
 Return: None
 Author: Project Echo Telion <echo.telion@gmail.com>
@@ -129,6 +130,21 @@ def seq_num():
     return (["0123","1234","2345","3456","4567",
              "5678","6789","9876","8765","7654",
              "6543","5432","4321","3210"])
+
+
+def clean_duplicate(num_list):
+	return_list = []
+	duplicate = set()
+	for each_num in num_list:
+		if each_num not in duplicate:
+			return_list.append(each_num)
+			duplicate.add(each_num)
+	return return_list
+
+
+
+
+
 
 ###################################
 #Below are codes use during testing#

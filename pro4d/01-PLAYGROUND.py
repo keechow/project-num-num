@@ -20,10 +20,34 @@ for each_draw in result:
 		prize1.append(p1)
 		prize2.append(p2)
 		prize3.append(p3)
+prize123 = prize1 + prize2 + prize3
 
-print len(prize1)
-print len(prize2)
-print len(prize3)
+# we want to eliminate same element within prize123
+prize123_clean = []
+duplicate = set()
+for each_num in prize123:
+	if each_num not in duplicate:
+		prize123_clean.append(each_num)
+		duplicate.add(each_num)
+
+"""
+ output = []
+    seen = set()
+    for value in values:
+        # If value has not been encountered yet,
+        # ... add it to both list and set.
+        if value not in seen:
+            output.append(value)
+            seen.add(value)
+    return output
+"""
+
+print "Total Prize123: " + str(len(prize123))
+print "Total Prize123_clean: " + str(len(prize123_clean))
+
+
+
+
 
 latest_3prize = []
 for each_draw in latest_result:
@@ -35,24 +59,5 @@ match1 = set(prize1) & set(latest_3prize)
 match2 = set(prize2) & set(latest_3prize)
 match3 = set(prize3) & set(latest_3prize)
 
-print
-print match1
-print len(match1)
-print
-print match2
-print len(match2)
-print
-print match3
-print len(match3)
 
-print
-print "===================="
-total_num = len(prize1) * 3.00
-print "Total Numbers: " + str(total_num)
-total_hit = len(match1) + len(match2) + len(match3)
-print "Total Hit: " + str(total_hit)
-percent = (total_hit / total_num) * 100.00
-print "Percent: " + str(percent)
-
-print percent
 
