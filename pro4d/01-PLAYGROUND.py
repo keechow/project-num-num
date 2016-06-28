@@ -5,7 +5,15 @@ all_num = na.gen_num()
 result = read("4D.txt")
 latest_result = read("4D-latest.txt")
 
-# generate 3 list for 1st prize, 2nd prize, 3rd prize numbers drawn for 2013, 2014, 2015, 2016
+latest_3prize = []    #latest prize 1,2,3
+for each_draw in latest_result:
+    latest_3prize.append(each_draw[2])
+    latest_3prize.append(each_draw[3])
+    latest_3prize.append(each_draw[4])
+
+all_4D_num = na.gen_num()    #all 4D num, 0000 - 9999
+i1_num = na.get_list_4()    #all 4 digits are the same
+i4_num = na.get_list_3()    #3 digits are the same
 
 prize1 = []
 prize2 = []
@@ -16,48 +24,21 @@ for each_draw in result:
 	p1 = each_draw[2]
 	p2 = each_draw[3]
 	p3 = each_draw[4]
-	if year == "07" or year == "08" or year == "09" or year == "10" or year == "11" or year == "12" or year == "13" or year == "14" or year == "15" or year == "16":
+	if year == "14" or year == "15" or year == "16":
 		prize1.append(p1)
 		prize2.append(p2)
 		prize3.append(p3)
 prize123 = prize1 + prize2 + prize3
 
 # we want to eliminate same element within prize123
-prize123_clean = []
-duplicate = set()
-for each_num in prize123:
-	if each_num not in duplicate:
-		prize123_clean.append(each_num)
-		duplicate.add(each_num)
+prize123_clean = na.clean_duplicate(prize123)
+eliminated_num_list = na.clean_duplicate(i1_num + i4_num + prize123_clean) #nums that we don't want
 
-"""
- output = []
-    seen = set()
-    for value in values:
-        # If value has not been encountered yet,
-        # ... add it to both list and set.
-        if value not in seen:
-            output.append(value)
-            seen.add(value)
-    return output
-"""
+clean_4d_num_list = []
+for each in all_4D_num:
+	if each not in eliminated_num_list:
+		clean_4d_num_list.append(each)
 
-print "Total Prize123: " + str(len(prize123))
-print "Total Prize123_clean: " + str(len(prize123_clean))
-
-
-
-
-
-latest_3prize = []
-for each_draw in latest_result:
-    latest_3prize.append(each_draw[2])
-    latest_3prize.append(each_draw[3])
-    latest_3prize.append(each_draw[4])
-
-match1 = set(prize1) & set(latest_3prize)
-match2 = set(prize2) & set(latest_3prize)
-match3 = set(prize3) & set(latest_3prize)
-
+print len(clean_4d_num_list)
 
 

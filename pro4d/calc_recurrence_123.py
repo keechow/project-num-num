@@ -59,5 +59,4 @@ print "Total Hit: " + str(total_hit)
 percent = (total_hit / total_num) * 100.00
 print "Percent: " + str(percent)
 
-print percent
 
