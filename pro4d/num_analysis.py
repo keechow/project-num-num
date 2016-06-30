@@ -65,6 +65,13 @@ def separate_num():
     global list_double
     global clean_list_2
 
+    del list_1[:]
+    del list_2[:]
+    del list_3[:]
+    del list_4[:]
+    del list_double[:]
+    del clean_list_2[:]
+
     num_list = gen_num()
     for each in num_list:
         occur = calc_occurence(each)
@@ -131,7 +138,6 @@ def seq_num():
              "5678","6789","9876","8765","7654",
              "6543","5432","4321","3210"])
 
-
 def clean_duplicate(num_list):
 	return_list = []
 	duplicate = set()
@@ -144,8 +150,6 @@ def clean_duplicate(num_list):
 
 
 
-
-
 ###################################
 #Below are codes use during testing#
-###################################
+##################################print

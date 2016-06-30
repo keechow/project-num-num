@@ -10,7 +10,7 @@ all_num = na.gen_num()
 result = read("4D.txt")
 latest_result = read("4D-latest.txt")
 
-# generate 3 list for 1st prize, 2nd prize, 3rd prize numbers drawn for 2013, 2014, 2015, 2016
+# generate 3 list for 1st prize, 2nd prize, 3rd prize numbers drawn
 
 prize1 = []
 prize2 = []

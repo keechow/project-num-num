@@ -1,7 +1,6 @@
 from file_handler import read
 import num_analysis as na
 
-all_num = na.gen_num()
 result = read("4D.txt")
 latest_result = read("4D-latest.txt")
 
@@ -13,7 +12,8 @@ for each_draw in latest_result:
 
 all_4D_num = na.gen_num()    #all 4D num, 0000 - 9999
 i1_num = na.get_list_4()    #all 4 digits are the same
-i4_num = na.get_list_3()    #3 digits are the same
+i4_num = na.get_list_3()  #3 digits are the same
+i1_num2 = na.get_list_4()
 
 prize1 = []
 prize2 = []
@@ -39,6 +39,12 @@ for each in all_4D_num:
 	if each not in eliminated_num_list:
 		clean_4d_num_list.append(each)
 
-print len(clean_4d_num_list)
+print "prize123_clean len: ", len(prize123_clean)
+print "i1num len: ", len(i1_num)
+print "i4num len: ", len(i4_num)
+print "clean 4d: ", len(clean_4d_num_list)
+print "el list: ", len(eliminated_num_list)
+
+
 
 
