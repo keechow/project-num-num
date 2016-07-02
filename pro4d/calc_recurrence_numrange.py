@@ -71,7 +71,14 @@ for each_set in filtered_result:
 	p2 = each_set[2]
 	p3 = each_set[3]
 
-	p1_dic[p1[0]].append([])
+	p1_dic[p1[0]].append([each_set[0],p1])
+	p2_dic[p2[0]].append([each_set[0],p2])
+	p3_dic[p3[0]].append([each_set[0],p3])
+
+print "Draws: ", len(filtered_result)
+
+
+
 
 
 
