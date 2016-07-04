@@ -68,7 +68,18 @@ p3_dic = {"0":p3_0k, "1":p3_1k, "2":p3_2k, "3":p3_3k, "4":p3_4k,
 		  "5":p3_5k ,"6":p3_6k, "7":p3_7k ,"8":p3_8k, "9":p3_9k}
 p3_list = [p3_0k, p3_1k, p3_2k, p3_3k, p3_4k,
 		   p3_5k ,p3_6k, p3_7k ,p3_8k, p3_9k]
-
+p123_0k = []
+p123_1k = []
+p123_2k = []
+p123_3k = []
+p123_4k = []
+p123_5k = []
+p123_6k = []
+p123_7k = []
+p123_8k = []
+p123_9k = []
+p123_dic = {"0":p123_0k, "1":p123_1k, "2":p123_2k, "3":p123_3k, "4":p123_4k,
+		    "5":p123_5k ,"6":p123_6k, "7":p123_7k ,"8":p123_8k, "9":p123_9k}
 
 #[['040792', '0019', '1124', '0592'], ['040892', '0905', '3591', '8690'], ['040992', '4162', '5766', '9514']]
 
@@ -81,6 +92,7 @@ for each_set in filtered_result:
 	p1_dic[p1[0]].append([each_set[0],p1])
 	p2_dic[p2[0]].append([each_set[0],p2])
 	p3_dic[p3[0]].append([each_set[0],p3])
+	
 
 
 
@@ -128,17 +140,9 @@ print "Average: ", (max_counter/10)
 print
 print "========================================"
 print
-print "For P1233: "
-max_counter = 0
-for each in p123_list:
-	print recurrence_max_min(each)
-	max_counter += recurrence_max_min(each)[0]
-print "Average: ", (max_counter/10)
-print
-print "========================================"
-print
 
 
+print filtered_result[:3]
 
 # generate all_4d_num
 
