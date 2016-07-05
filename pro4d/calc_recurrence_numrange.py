@@ -14,14 +14,14 @@ filtered_result = []    # just want draw no. 1st, 2nd and 3rd
 for each in result:
 	filtered_result.append([each[0],each[2],each[3],each[4]])
 
-filtered_result_p1 = []    # prize 1 num
-filtered_result_p2 = []    # prize 2 num
-filtered_result_p3 = []    # prize 3 num
+#filtered_result_p1 = []    # prize 1 num
+#filtered_result_p2 = []    # prize 2 num
+#filtered_result_p3 = []    # prize 3 num
 
-for each in filtered_result:
-	filtered_result_p1.append([each[0],each[1]])
-	filtered_result_p2.append([each[0],each[2]])
-	filtered_result_p3.append([each[0],each[3]])
+#for each in filtered_result:
+#	filtered_result_p1.append([each[0],each[1]])
+#	filtered_result_p2.append([each[0],each[2]])
+#	filtered_result_p3.append([each[0],each[3]])
 
 # separate nums into respective num range
 p1_0k = []
@@ -80,7 +80,8 @@ p123_8k = []
 p123_9k = []
 p123_dic = {"0":p123_0k, "1":p123_1k, "2":p123_2k, "3":p123_3k, "4":p123_4k,
 		    "5":p123_5k ,"6":p123_6k, "7":p123_7k ,"8":p123_8k, "9":p123_9k}
-
+p123_list = [p123_0k, p123_1k, p123_2k, p123_3k, p123_4k,
+		     p123_5k ,p123_6k, p123_7k ,p123_8k, p123_9k]
 #[['040792', '0019', '1124', '0592'], ['040892', '0905', '3591', '8690'], ['040992', '4162', '5766', '9514']]
 
 for each_set in filtered_result:
@@ -92,7 +93,10 @@ for each_set in filtered_result:
 	p1_dic[p1[0]].append([each_set[0],p1])
 	p2_dic[p2[0]].append([each_set[0],p2])
 	p3_dic[p3[0]].append([each_set[0],p3])
-	
+	p123_dic[p1[0]].append([each_set[0],p1])
+	p123_dic[p2[0]].append([each_set[0],p2])
+	p123_dic[p3[0]].append([each_set[0],p3])
+
 
 
 
@@ -113,6 +117,8 @@ def recurrence_max_min(num_list):
 			min_counter = diff
 		idx += 1
 	return [max_counter,min_counter]
+
+"""
 print "For P1:"
 max_counter = 0
 for each_num_range in p1_list:
@@ -138,11 +144,22 @@ for each in p3_list:
 	max_counter += recurrence_max_min(each)[0]
 print "Average: ", (max_counter/10)
 print
+"""
+print "========================================"
+print
+print "For P123: "
+max_counter = 0
+for each in p123_list:
+	print recurrence_max_min(each)
+	max_counter += recurrence_max_min(each)[0]
+
+print "Average: ", (max_counter/10)
+print
 print "========================================"
 print
 
 
-print filtered_result[:3]
+
 
 # generate all_4d_num
 
