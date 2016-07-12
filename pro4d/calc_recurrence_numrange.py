@@ -104,6 +104,8 @@ def recurrence_max_min(num_list):
 	#[['040792', '0019'], ['040892', '0905'], ['043692', '0808'], ['047092', '0753']]]
 	max_counter = 0
 	min_counter = 0
+	recurrence_rate = []
+
 	idx = 0
 	while idx < (len(num_list) - 1):
 		current_data = num_list[idx]
@@ -111,51 +113,153 @@ def recurrence_max_min(num_list):
 		c_draw = int(current_data[0][:4])
 		n_draw = int(nxt_data[0][:4])
 		diff = n_draw - c_draw
+		recurrence_rate.append(diff)
 		if diff > max_counter:
 			max_counter = diff
 		if min_counter > diff or min_counter == 0:
 			min_counter = diff
 		idx += 1
-	return [max_counter,min_counter]
+	return [max_counter,min_counter, recurrence_rate]
 
-"""
 print "For P1:"
-max_counter = 0
-for each_num_range in p1_list:
-	print recurrence_max_min(each_num_range)
-	max_counter += recurrence_max_min(each_num_range)[0]
-print "Average : ", (max_counter/10)
+ctr = 0
+for each in p1_list:
+	r_rate =  recurrence_max_min(each)[2]
+	recurrence_avg_less = 0
+	recurrence_avg_more = 0
+	recurrence_avg = 0
+	recurrence_count = sum(r_rate)    #sum of all element in recurrence count
+	recurrence_average = recurrence_count/len(r_rate)
+	for each in r_rate:
+		if each == recurrence_average:
+			recurrence_avg += 1
+		elif each < recurrence_average:
+			recurrence_avg_less += 1
+		else:
+			recurrence_avg_more += 1
+	print "Current num_range: ", ctr
+	print "Average : ", recurrence_average
+	print "Number of recurrence period less than average: ", recurrence_avg_less
+	print "Number of recurrence period more than average: ", recurrence_avg_more
+	print "Number of recurrence period equal to average: ", recurrence_avg
+	print "================================================================"
+	ctr += 1
 print
-print "========================================"
 print
-print "For P2: "
-max_counter = 0
-for each in p2_list:
-	print recurrence_max_min(each)
-	max_counter += recurrence_max_min(each)[0]
-print "Average: ", (max_counter/10)
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
 print
-print "========================================"
-print
-print "For P3: "
-max_counter = 0
-for each in p3_list:
-	print recurrence_max_min(each)
-	max_counter += recurrence_max_min(each)[0]
-print "Average: ", (max_counter/10)
-print
-"""
-print "========================================"
-print
-print "For P123: "
-max_counter = 0
-for each in p123_list:
-	print recurrence_max_min(each)
-	max_counter += recurrence_max_min(each)[0]
 
-print "Average: ", (max_counter/10)
+print "For P2: "
+ctr = 0
+for each in p2_list:
+
+	r_rate =  recurrence_max_min(each)[2]
+	recurrence_avg_less = 0
+	recurrence_avg_more = 0
+	recurrence_avg = 0
+	recurrence_count = sum(r_rate)    #sum of all element in recurrence count
+	recurrence_average = recurrence_count/len(r_rate)
+	for each in r_rate:
+		if each == recurrence_average:
+			recurrence_avg += 1
+		elif each < recurrence_average:
+			recurrence_avg_less += 1
+		else:
+			recurrence_avg_more += 1
+	print "Current num_range: ", ctr
+	print "Average : ", recurrence_average
+	print "Number of recurrence period less than average: ", recurrence_avg_less
+	print "Number of recurrence period more than average: ", recurrence_avg_more
+	print "Number of recurrence period equal to average: ", recurrence_avg
+	print "================================================================"
+	ctr += 1
 print
-print "========================================"
+print
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print
+
+print "For P3: "
+ctr = 0
+for each in p3_list:
+	r_rate =  recurrence_max_min(each)[2]
+	recurrence_avg_less = 0
+	recurrence_avg_more = 0
+	recurrence_avg = 0
+	recurrence_count = sum(r_rate)    #sum of all element in recurrence count
+	recurrence_average = recurrence_count/len(r_rate)
+	for each in r_rate:
+		if each == recurrence_average:
+			recurrence_avg += 1
+		elif each < recurrence_average:
+			recurrence_avg_less += 1
+		else:
+			recurrence_avg_more += 1
+	print "Current num_range: ", ctr
+	print "Average : ", recurrence_average
+	print "Number of recurrence period less than average: ", recurrence_avg_less
+	print "Number of recurrence period more than average: ", recurrence_avg_more
+	print "Number of recurrence period equal to average: ", recurrence_avg
+	print "================================================================"
+	ctr += 1
+print
+print
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print
+
+print "For P123: "
+ctr = 0
+for each in p123_list:
+	r_rate =  recurrence_max_min(each)[2]
+	recurrence_avg_less = 0
+	recurrence_avg_more = 0
+	recurrence_avg = 0
+	recurrence_count = sum(r_rate)    #sum of all element in recurrence count
+	recurrence_average = recurrence_count/len(r_rate)
+	for each in r_rate:
+		if each == recurrence_average:
+			recurrence_avg += 1
+		elif each < recurrence_average:
+			recurrence_avg_less += 1
+		else:
+			recurrence_avg_more += 1
+	print "Current num_range: ", ctr
+	print "Average : ", recurrence_average
+	print "Number of recurrence period less than average: ", recurrence_avg_less
+	print "Number of recurrence period more than average: ", recurrence_avg_more
+	print "Number of recurrence period equal to average: ", recurrence_avg
+	print "================================================================"
+	ctr += 1
+print
+print
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
+print "======================================================================================"
 print
 
 
