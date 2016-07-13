@@ -128,9 +128,12 @@ for each in p1_list:
 	recurrence_avg_less = 0
 	recurrence_avg_more = 0
 	recurrence_avg = 0
+	r_custom = 0
 	recurrence_count = sum(r_rate)    #sum of all element in recurrence count
 	recurrence_average = recurrence_count/len(r_rate)
 	for each in r_rate:
+		if each < 15:
+			r_custom += 1
 		if each == recurrence_average:
 			recurrence_avg += 1
 		elif each < recurrence_average:
@@ -142,6 +145,10 @@ for each in p1_list:
 	print "Number of recurrence period less than average: ", recurrence_avg_less
 	print "Number of recurrence period more than average: ", recurrence_avg_more
 	print "Number of recurrence period equal to average: ", recurrence_avg
+	print "No. of recurrence period less than 12: ", r_custom
+	print "Total: ", len(r_rate)
+	print "Percentage: ", (float(r_custom)/len(r_rate))
+
 	print "================================================================"
 	ctr += 1
 print
@@ -164,9 +171,12 @@ for each in p2_list:
 	recurrence_avg_less = 0
 	recurrence_avg_more = 0
 	recurrence_avg = 0
+	r_custom = 0
 	recurrence_count = sum(r_rate)    #sum of all element in recurrence count
 	recurrence_average = recurrence_count/len(r_rate)
 	for each in r_rate:
+		if each < 15:
+			r_custom += 1
 		if each == recurrence_average:
 			recurrence_avg += 1
 		elif each < recurrence_average:
@@ -178,6 +188,10 @@ for each in p2_list:
 	print "Number of recurrence period less than average: ", recurrence_avg_less
 	print "Number of recurrence period more than average: ", recurrence_avg_more
 	print "Number of recurrence period equal to average: ", recurrence_avg
+	print "No. of recurrence period less than 12: ", r_custom
+	print "Total: ", len(r_rate)
+	print "Percentage: ", (float(r_custom)/len(r_rate))
+
 	print "================================================================"
 	ctr += 1
 print
@@ -199,9 +213,12 @@ for each in p3_list:
 	recurrence_avg_less = 0
 	recurrence_avg_more = 0
 	recurrence_avg = 0
+	r_custom = 0
 	recurrence_count = sum(r_rate)    #sum of all element in recurrence count
 	recurrence_average = recurrence_count/len(r_rate)
 	for each in r_rate:
+		if each < 15:
+			r_custom += 1
 		if each == recurrence_average:
 			recurrence_avg += 1
 		elif each < recurrence_average:
@@ -213,6 +230,10 @@ for each in p3_list:
 	print "Number of recurrence period less than average: ", recurrence_avg_less
 	print "Number of recurrence period more than average: ", recurrence_avg_more
 	print "Number of recurrence period equal to average: ", recurrence_avg
+	print "No. of recurrence period less than 1l2: ", r_custom
+	print "Total: ", len(r_rate)
+	print "Percentage: ", (float(r_custom)/len(r_rate))
+
 	print "================================================================"
 	ctr += 1
 print
@@ -234,9 +255,12 @@ for each in p123_list:
 	recurrence_avg_less = 0
 	recurrence_avg_more = 0
 	recurrence_avg = 0
+	r_custom = 0
 	recurrence_count = sum(r_rate)    #sum of all element in recurrence count
 	recurrence_average = recurrence_count/len(r_rate)
 	for each in r_rate:
+		if each < 6:
+			r_custom += 1
 		if each == recurrence_average:
 			recurrence_avg += 1
 		elif each < recurrence_average:
@@ -248,6 +272,9 @@ for each in p123_list:
 	print "Number of recurrence period less than average: ", recurrence_avg_less
 	print "Number of recurrence period more than average: ", recurrence_avg_more
 	print "Number of recurrence period equal to average: ", recurrence_avg
+	print "No. of recurrence period less than 6: ", r_custom
+	print "Total: ", len(r_rate)
+	print "Percentage: ", (float(r_custom)/len(r_rate))
 	print "================================================================"
 	ctr += 1
 print
