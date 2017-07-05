@@ -1,0 +1,5 @@
+1) Stage 1: Get result data
+
+2) Stage 2: Parse Data
+
+3) Stage 3: Analyse Data

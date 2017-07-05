@@ -1,38 +1,58 @@
- __author__ = 'keechow'
-"""
-File name:  get_result_frm_webpage.py
-Objective: Get raw draw result data from webpage
-Note:
-
-"""
-
-# parse from website
-# base_url = "http://my.myfreepost.com/en/"
-# search_term = "?dMonth=01&dYear=1996"
-# company_names = "sportstoto", "damacai", "magnum"
-# earliest data for sportstoto = January 1993
-# earliest data for magnum = January 1996
-# earliest data for damacai = January 1997
-# e.g.    http://my.myfreepost.com/en/magnum/4d/top3prize/?dMonth=01&dYear=1998
-
-
-
-# we want to create a URL builder, to loop months and year, something like URI Builder
-
-
-#### IMPORT THIS ####  IMPORT THAT ####
-from bs4 import BeautifulSoup
-import urllib2
-import time
-
-#### IMPORT THIS ####  IMPORT THAT ####
-
-def request_user_input():
-	# this method is to display messages asking for user input to
-	# determine start date and end date of data wanted
+def build_url_search_term(start_month, start_year,  num_of_month, company):
+	# this method is to generate a list of month&year to be used to generate url search term
+	# params: start_date: int, start_year: int, num_of_month: int, company: int,
 	# use time.strftime() to get local time in str
 	# "%m": month in decimal, "%Y": full year
-	# list_return_data = [(str_start_month, str_start_year) , (str_end_month, str_end_year), str_co_name)
+
+	# base_url = "http://my.myfreepost.com/en/"
+	# search_term = "?dMonth=01&dYear=1996"
+	# company_names = "sportstoto", "damacai", "magnum"
+	# earliest data for sportstoto = January 1993
+	# earliest data for magnum = January 1996
+	# earliest data for damacai = January 1997
+	# e.g.    http://my.myfreepost.com/en/magnum/4d/top3prize/?dMonth=01&dYear=1998
+
+
+	### generate a list of month and year wanted to search
+	int_start_month = int(start_month)
+	int_start_year = int(start_year)
+	int_num_of_month = int(num_of_month)
+
+
+	### determine how many years & months to add based on int_num_of_month
+	num_of_year = int_num_of_month / 12
+	num_of_mnth = int_num_of_month % 12
+
+	### generate iteration for months between start and end date
+	list_year = []
+	list_month = []
+
+	while int_num_of_month > 0:
+		while int_start_month <13 and int_num_of_month >= 0:
+			list_month.append(str(int_start_month))
+			list_year.append(str(int_start_year))
+			int_start_month = int_start_month + 1
+			int_num_of_month -=1
+		int_start_year += 1
+		int_start_month = 1
+
+
+
+
+
+
+
+
+
+
+	company_name = ["", "magnum", "damacai", "sportstoto"]    #list of company's names
+	co_name = company_name[company]
+	base_url = "http://my.myfreepost.com/en/"
+	co_url = co_name + "/4d/top3prize/"
+
+
+
+
 
 	request_company_name = "\nPlease select company.\n " \
 						   "1 = Magnum\n 2 = Damacai\n 3 = SportsToto\n>"
@@ -53,7 +73,7 @@ def request_user_input():
 
 	end_date_mode_2_num_of_month = "\nPlease enter number of months from start month. (Integer only)\n>"
 
-	company_name = ["", "magnum", "damacai", "sportstoto"]    #list of company's names
+
 
 	usr_input_co_name = int(raw_input(request_company_name))
 	usr_input_start_month = int( raw_input(request_start_month))
@@ -61,7 +81,7 @@ def request_user_input():
 	usr_input_end_date_mode = int(raw_input(select_end_date_mode))
 
 	tuple_start_date = (str(usr_input_start_month),str( usr_input_start_year))
-
+	
 	tuple_end_date = ""
 
 	if usr_input_end_date_mode == 3:
@@ -82,47 +102,5 @@ def request_user_input():
 		tuple_end_date  =(usr_input_end_month, usr_input_end_year)
 
 	return [tuple_start_date, tuple_end_date, company_name[usr_input_co_name]]
-
-	# return list = [(str_start_month, str_start_year) , (str_end_month, str_end_year), str_co_name]
-
-
-
-def url_builder():
-	# build a set of URL with different search term to download HTML result
-	# generate search term up to latest result
-
-# setting up all the counter to loop month & year for building url
-	month_ctr = 01
-	sportstoto_yr_ctr = 1993
-	magnum_yr_ctr = 1996
-	damacai_yr_ctr = 1997
-
-# constructing search url
-	url_co = ""
-	url_month = ""
-	url_year = ""
-
-	search_url = "http://my.myfreepost.com/en/" + url_co + "/4d/top3prize/" +"?dMonth=" + url_month + "&dYear=" + url_year"    #base url for search
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
