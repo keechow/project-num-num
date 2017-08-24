@@ -1,11 +1,12 @@
 """
 Name: num_analysis.py
-Objective:  1. Generate numbers from 0000 to 9999
-            2. Separate each number to different category - i24, i12, i6, i4
-            3. Allow user to get a list of these numbers
-            4. Various methods for users to manipulate 4D nums
-Params: None
-Return: None
+List of functions:
+    1) str_num(): take an integer return a 4 digit string
+    2) gen_num(): generate a string list containing element 0001 to 9999
+    3) calc_occurence(): calculate how many times a num is repeated
+    4) check_double_double(): check if given number is  double-double
+    5) separate_num(): run gen_num() and separate num into respective num category
+
 Author: Project Echo Telion <echo.telion@gmail.com>
 
 """
@@ -93,34 +94,33 @@ def separate_num():
     set_list_double = set(list_double)
     clean_list_2 = list(set_list2.difference(set_list_double))
 
+# return list of number with no repeating digit
 def get_list_1():
-    # return list of number with no repeating digit
     separate_num()
     return list_1
 
+# return list of number with 2 repeating digits
 def get_list_2():
-    # return list of number with 2 repeating digits
     separate_num()
     return clean_list_2
 
+# return list of number with 3 repeating digits
 def get_list_3():
-    # return list of number with 3 repeating digits
     separate_num()
     return list_3
 
+# return list of number with 4 repeating digits
 def get_list_4():
-    # return list of number with 4 repeating digits
     separate_num()
     return list_4
 
+#return list of number with double double repeating digits
 def get_list_double():
-    #return list of number with double double repeating digits
     separate_num()
     return list_double
 
+#return the num cat for given num (24 or 12 or 6 or 4)
 def check_num_cat(num):
-    #return the num cat for given num
-    #24 or 12 or 6 or 4
     occur = calc_occurence(num)
 
     if occur == 1:
@@ -135,10 +135,12 @@ def check_num_cat(num):
     else:
         return 1
 
+#return a list of sequential numbers, e.g. 1234, 4567, 6789
 def seq_num():
     return (["0123","1234","2345","3456","4567",
              "5678","6789","9876","8765","7654",
              "6543","5432","4321","3210"])
+
 
 def clean_duplicate(num_list):
 	return_list = []
@@ -160,6 +162,7 @@ def identify_odd_even(num):
         return "Even"
 
 def identify_n_sum(num):
+
     total = 0
     for each in num:
         total += int(each)

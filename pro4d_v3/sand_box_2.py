@@ -1,15 +1,8 @@
-__author__ = 'keechow'
-
-minute = 0
-hour = 0
-num_of_cycle = 100
-
-while num_of_cycle > 0:
-	while minute < 60 and num_of_cycle >= 0:
-		print("Hour: " + str(hour) +" Min: " + str(minute))
-		print(num_of_cycle)
-		minute += 1
-		num_of_cycle -=1
-	hour += 1
-	minute = 0
-
+str_1="1999-03-318498 - 3773 - 6576"
+print str_1[:4]+str_1[5:7]+str_1[8:10]
+print
+print(str_1[10:14])
+print
+print(str_1[17:21])
+print
+print(str_1[24:])

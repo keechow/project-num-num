@@ -1,4 +1,4 @@
-from file_handler import read
+		from file_handler import read
 import num_analysis as na
 
 result = read("4D.txt")
@@ -10,9 +10,9 @@ for each_draw in latest_result:
     latest_3prize.append(each_draw[3])
     latest_3prize.append(each_draw[4])
 
-all_4D_num = na.gen_num()    #all 4D num, 0000 - 9999
-i1_num = na.get_list_4()    #all 4 digits are the same
-i4_num = na.get_list_3()  #3 digits are the same
+all_4D_num = na.gen_num()    	#all 4D num, 0000 - 9999
+i1_num = na.get_list_4()    	#all 4 digits are the same
+i4_num = na.get_list_3()		#3 digits are the same
 i1_num2 = na.get_list_4()
 
 prize1 = []

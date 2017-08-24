@@ -21,7 +21,7 @@ for each_draw in result:
 	p1 = each_draw[2]
 	p2 = each_draw[3]
 	p3 = each_draw[4]
-	if year == "07" or year == "08" or year == "09" or year == "10" or year == "11" or year == "12" or year == "13" or year == "14" or year == "15" or year == "16":
+	if year == "13" or year == "14" or year == "15" or year == "16":
 		prize1.append(p1)
 		prize2.append(p2)
 		prize3.append(p3)
@@ -50,6 +50,8 @@ print
 print match3
 print len(match3)
 
+"""
+##repeated numbers not filtered out##
 print
 print "===================="
 total_num = len(prize1) * 3.00
@@ -58,5 +60,5 @@ total_hit = len(match1) + len(match2) + len(match3)
 print "Total Hit: " + str(total_hit)
 percent = (total_hit / total_num) * 100.00
 print "Percent: " + str(percent)
-
+"""
 
