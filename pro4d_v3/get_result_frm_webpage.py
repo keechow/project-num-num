@@ -163,12 +163,5 @@ def parse_data_from_url(str_url):
 ####################
 ##      TESTING GROUND     ##
 ####################
-"""
-url_1= "http://my.myfreepost.com/en/damacai/4d/top3prize/?dMonth=7&dYear=2017"
 
-data = parse_data_from_url(url_1)
-
-data1 = list(reversed(data))
-print data
-"""
 
