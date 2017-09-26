@@ -3,6 +3,7 @@ __author__ = 'keechow'
 from  get_result_frm_webpage import build_url_search_term
 from  get_result_frm_webpage import parse_data_from_url
 from openpyxl import load_workbook
+from openpyxl import Workbook
 
 import num_analysis
 
@@ -119,19 +120,20 @@ def counter_list_3draw(drawSet_data):
 
 	return return_counter_list
 
-def port_counter_list_to_xls(list_counter, name):
+def port_counter_list_to_xls(list_counter, s_name):
 	# params: counter list
 	# objective: port the counter list into xls spreadsheet for easy visualization and further studies
 
 	#1. load xls workbook
-	my_wb = load_workbook("list_3drawset_pattern.xlsx")
+	my_wb =  load_workbook("list_3drawset_pattern.xlsx")
+
 	#2. load worksheet in workbook
 	sheet_names = my_wb.sheetnames
 
-	if name in sheet_names:
-		my_ws = my_wb.get_sheet_by_name(name)
+	if s_name in sheet_names:
+		my_ws = my_wb.get_sheet_by_name(s_name)
 	else:
-		my_ws = my_wb.create_sheet(title=name)
+		my_ws = my_wb.create_sheet(title=s_name)
 
 	drawset_counter = 0
 	while drawset_counter < len(list_counter):
@@ -173,6 +175,22 @@ def identify_zero_count_pattern(list_data):
 
 	return list_zero_count_pattern
 
+def nr_vs_pcat_1_3drawset_count_p2excel(list_data):
+	# params: data list from txt file
+	# 1) extract 3 draw set pattern (nr vs pcat)
+	# 2) count occurrence for each 3draw set pattern
+	# 3) port the counter list to excel for future analysis
+	# 4) pcat pattern = 111,121,131,  211,221,231, 311,321,331
+
+	for pcat0 in range(1,4):
+		for pcat1 in range(1,4):
+			nr_3drawset_pattern = nr_3drawSet(list_data, pcat0, pcat1, 1)
+			nr_counter_list = counter_list_3draw(nr_3drawset_pattern)
+			sheet_name = str(pcat0) + str(pcat1) + "1"
+			port_counter_list_to_xls(nr_counter_list, sheet_name)
+
+
+
 # 1) get data from the web
 # 2) parse raw data
 # 3) save data into file
@@ -187,12 +205,12 @@ def identify_zero_count_pattern(list_data):
 ##                                  RUN  CODE                                 ##
 ##########################################
 
-
+"""
 ### Run once to get data from Internet and save into file ###
 
 start_month = "01"
-start_year = "1996"
-num_of_month = "12"
+start_year = "2011"
+num_of_month = "81"
 company = "magnum"
 
 data_file_name = company + "_" + start_year + "_" + start_month + "_" + num_of_month + "_m.txt"
@@ -205,8 +223,14 @@ save_to_file(list_data_whole_range,data_file_name)
 """
 
 
-dmc_1997_01_248m_list_data = load_from_file(data_file_name)
-magnum_
+dmc_1997_01_248m_list_data = load_from_file("damacai_1997_01_248_m.txt")
+magnum_1996_01_260m_list_data = load_from_file("magnum_1996_01_260_m.txt")
+sportstoto_1993_01_296m_list_data = load_from_file("sportstoto_1993_01_296_m.txt")
+
+nr_vs_pcat_1_3drawset_count_p2excel(sportstoto_1993_01_296m_list_data)
+
+
+"""
 
 dmc_pcat111_nr_3drawset_pattern = nr_3drawSet(dmc_1997_01_248m_list_data, 1,1,1)
 dmc_pcat121_nr_3drawset_pattern = nr_3drawSet(dmc_1997_01_248m_list_data, 1,2,1)
