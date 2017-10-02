@@ -3,7 +3,7 @@ __author__ = 'keechow'
 from  get_result_frm_webpage import build_url_search_term
 from  get_result_frm_webpage import parse_data_from_url
 from openpyxl import load_workbook
-from openpyxl import Workbook
+from calendar import weekday
 
 import num_analysis
 
@@ -189,17 +189,68 @@ def nr_vs_pcat_1_3drawset_count_p2excel(list_data):
 			sheet_name = str(pcat0) + str(pcat1) + "1"
 			port_counter_list_to_xls(nr_counter_list, sheet_name)
 
+def nr_3drawSet_dmc3d(list_data, p_cat0, p_cat1, p_cat3):
+	## 1. get data from input
+	## 2. Extract num range for 3 consecutive draws and save into a list
+	## 3. Return the list
+	max_loop_count = len(list_data) - 3
+	counter = 0
 
+	list_p1_nr_3drawSet = []
 
-# 1) get data from the web
-# 2) parse raw data
-# 3) save data into file
-# 4) read data and extract num-range
-# 5) extract num-range for 3 consecutive draws
-# 6) start counting
-#		6a) 3 draws = 1000 variations, 000 ~ 999
-#		7b)
+	while counter <= max_loop_count:
+		num_range1 = list_data[counter][p_cat0][1]
+		num_range2 = list_data[counter + 1][p_cat1][1]
+		num_range3 = list_data[counter + 2][p_cat3][1]
 
+		list_p1_nr_3drawSet.append(num_range1+num_range2+num_range3)
+		counter += 1
+
+	return list_p1_nr_3drawSet
+
+def nr_vs_pcat_1_3drawset_count_p2excel_dmc3d(list_data):
+	# params: data list from txt file
+	# 1) extract 3 draw set pattern (nr vs pcat)
+	# 2) count occurrence for each 3draw set pattern
+	# 3) port the counter list to excel for future analysis
+	# 4) pcat pattern = 111,121,131,  211,221,231, 311,321,331
+
+	for pcat0 in range(1,4):
+		for pcat1 in range(1,4):
+			nr_3drawset_pattern = nr_3drawSet_dmc3d(list_data, pcat0, pcat1, 1)
+			nr_counter_list = counter_list_3draw(nr_3drawset_pattern)
+			sheet_name = str(pcat0) + str(pcat1) + "1"
+			port_counter_list_to_xls(nr_counter_list, sheet_name)
+
+def gen_data_list_by_day_of_week(list_data):
+	# params: data list from txt file
+	# obj: separate draw data into Wed, Sat, Sun, Special draw day
+	# return: a list containing 4 list element, [wed, sat, sun, other]
+	list_wed_draw = []
+	list_sat_draw = []
+	list_sun_draw = []
+	list_other_draw = []
+
+	#list to store draw result for Wed, Sat, Sun and other day
+
+	dict_draw_day_list = {2:list_wed_draw, 5:list_sat_draw, 6:list_sun_draw}
+
+	for each_data_set in dmc_1997_01_248m_list_data:
+		# [["19970101", "4102", "5257", "0061"],....
+		# extract year, month, day from data and use calendar.weekday() to determine day of the week
+
+		year = int(each_data_set[0][:4])
+		month =  int(each_data_set[0][4:6])
+		day =  int(each_data_set[0][6:])
+
+		day_of_week = weekday(year,month,day)
+
+		if day_of_week in dict_draw_day_list:
+			dict_draw_day_list[day_of_week].append(each_data_set)
+		else:
+			list_other_draw.append(each_data_set)
+
+	return [list_wed_draw, list_sat_draw, list_sun_draw, list_other_draw]
 
 ##########################################
 ##                                  RUN  CODE                                 ##
@@ -227,55 +278,23 @@ dmc_1997_01_248m_list_data = load_from_file("damacai_1997_01_248_m.txt")
 magnum_1996_01_260m_list_data = load_from_file("magnum_1996_01_260_m.txt")
 sportstoto_1993_01_296m_list_data = load_from_file("sportstoto_1993_01_296_m.txt")
 
-nr_vs_pcat_1_3drawset_count_p2excel(sportstoto_1993_01_296m_list_data)
+dmc_1997_01_248m_list_data_DOW = gen_data_list_by_day_of_week(dmc_1997_01_248m_list_data)
+magnum_1996_01_260m_list_data_DOW =gen_data_list_by_day_of_week(magnum_1996_01_260m_list_data)
+sportstoto_1993_01_296m_list_data_DOW =gen_data_list_by_day_of_week(sportstoto_1993_01_296m_list_data)
 
-
-"""
-
-dmc_pcat111_nr_3drawset_pattern = nr_3drawSet(dmc_1997_01_248m_list_data, 1,1,1)
-dmc_pcat121_nr_3drawset_pattern = nr_3drawSet(dmc_1997_01_248m_list_data, 1,2,1)
-dmc_pcat131_nr_3drawset_pattern = nr_3drawSet(dmc_1997_01_248m_list_data, 1,3,1)
-
-dmc_pcat211_nr_3drawset_pattern = nr_3drawSet(dmc_1997_01_248m_list_data, 2,1,1)
-dmc_pcat221_nr_3drawset_pattern = nr_3drawSet(dmc_1997_01_248m_list_data, 2,2,1)
-dmc_pcat231_nr_3drawset_pattern = nr_3drawSet(dmc_1997_01_248m_list_data, 2,3,1)
-
-dmc_pcat311_nr_3drawset_pattern = nr_3drawSet(dmc_1997_01_248m_list_data, 3,1,1)
-dmc_pcat321_nr_3drawset_pattern = nr_3drawSet(dmc_1997_01_248m_list_data, 3,2,1)
-dmc_pcat331_nr_3drawset_pattern = nr_3drawSet(dmc_1997_01_248m_list_data, 3,3,1)
-
-dmc_pcat111_nr_counter_list = counter_list_3draw(dmc_pcat111_nr_3drawset_pattern)
-dmc_pcat121_nr_counter_list = counter_list_3draw(dmc_pcat121_nr_3drawset_pattern)
-dmc_pcat131_nr_counter_list = counter_list_3draw(dmc_pcat131_nr_3drawset_pattern)
-
-dmc_pcat211_nr_counter_list = counter_list_3draw(dmc_pcat211_nr_3drawset_pattern)
-dmc_pcat221_nr_counter_list = counter_list_3draw(dmc_pcat221_nr_3drawset_pattern)
-dmc_pcat231_nr_counter_list = counter_list_3draw(dmc_pcat231_nr_3drawset_pattern)
-
-dmc_pcat311_nr_counter_list = counter_list_3draw(dmc_pcat311_nr_3drawset_pattern)
-dmc_pcat321_nr_counter_list = counter_list_3draw(dmc_pcat321_nr_3drawset_pattern)
-dmc_pcat331_nr_counter_list = counter_list_3draw(dmc_pcat331_nr_3drawset_pattern)
-
-
-port_counter_list_to_xls(dmc_pcat111_nr_counter_list, "111")
-port_counter_list_to_xls(dmc_pcat121_nr_counter_list, "121")
-port_counter_list_to_xls(dmc_pcat131_nr_counter_list, "131")
-
-port_counter_list_to_xls(dmc_pcat211_nr_counter_list, "211")
-port_counter_list_to_xls(dmc_pcat221_nr_counter_list, "221")
-port_counter_list_to_xls(dmc_pcat231_nr_counter_list, "231")
-
-port_counter_list_to_xls(dmc_pcat311_nr_counter_list, "311")
-port_counter_list_to_xls(dmc_pcat321_nr_counter_list, "321")
-port_counter_list_to_xls(dmc_pcat331_nr_counter_list, "331")
+for each in dmc_1997_01_248m_list_data_DOW:
+	print("")
+	print each
+	print("")
+	print("")
+	print("")
+	print("")
 
 
 
-#save_to_file(built_url_parse_data()) ## step 1, 2, 3
-#data_3draw_set = p1_nr_3drawSet()
-#count_3draw_set = counter_list_3draw(data_3draw_set)
 
-"""
+
+
 
 print
 print
