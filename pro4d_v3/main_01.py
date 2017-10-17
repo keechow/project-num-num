@@ -43,66 +43,13 @@ def built_url_parse_data(s_month, s_year, num_month, company):
 
 	return list_data_whole_range
 
-def nr_3drawSet(list_data, p_cat0, p_cat1, p_cat3):
-	## 1. get data from input
-	## 2. Extract num range for 3 consecutive draws and save into a list
-	## 3. Return the list
-	max_loop_count = len(list_data) - 3
-	counter = 0
-
-	list_p1_nr_3drawSet = []
-
-	while counter <= max_loop_count:
-		num_range1 = list_data[counter][p_cat0][0]
-		num_range2 = list_data[counter + 1][p_cat1][0]
-		num_range3 = list_data[counter + 2][p_cat3][0]
-
-		list_p1_nr_3drawSet.append(num_range1+num_range2+num_range3)
-		counter += 1
-
-	return list_p1_nr_3drawSet
-
-def nr_drawSet(list_data, list_pcat):
-	# params: list_data
-	# params: list_pcat - type list, containing pcat for num range
-
-	num_of_draw = len(list_pcat)
-	max_loop_count = len(list_data) - num_of_draw
-	loop_count = 0
-	return_list_nr_drawset = []
-
-	while loop_count <= max_loop_count:
-		drawset_pattern = ""
-		pcat_count = 0
-		while pcat_count < num_of_draw:
-			pcat = list_pcat[pcat_count]
-			pattern = list_data[loop_count + pcat_count][pcat][0]
-			drawset_pattern += pattern
-			pcat_count += 1
-		return_list_nr_drawset.append(drawset_pattern)
-		loop_count +=  1
-
-	return return_list_nr_drawset
-
-def nr_4drawSet(list_data, p_cat0, p_cat1, p_cat2, p_cat3):
-	## 1. Get data from input
-	## 2. Extract num range for 4 consecutive draws and save into a list
-	## 3. Return the list
-
-	max_loop_count = len(list_data) - 4
-	counter = 0
-
-	list_p1_nr_4drawSet = []
-
-	while counter <= max_loop_count:
-		num_range1 = list_data[counter][p_cat0][0]
-		num_range2 = list_data[counter + 1][p_cat1][0]
-		num_range3 = list_data[counter + 2][p_cat2][0]
-		num_range4 = list_data[counter + 3][p_cat3][0]
-		list_p1_nr_4drawSet.append(num_range1+num_range2+num_range3+num_range4)
-		counter += 1
-
-	return list_p1_nr_4drawSet
+def remove_duplicate (list_data):
+	# removes duplicates in list_data
+	clean_list = []
+	for each in list_data:
+		if not each in clean_list:
+			clean_list.append(each)
+	return(sorted(clean_list))
 
 def counter_list_3draw(drawSet_data):
 	# params: list of data containing draw set pattern
@@ -151,16 +98,8 @@ def port_counter_list_to_xls(list_counter, s_name):
 		drawset_counter += 1
 	my_wb.save("list_3drawset_pattern.xlsx")
 
-def remove_duplicate (list_data):
-	# removes duplicates in list_data
-	clean_list = []
-	for each in list_data:
-		if not each in clean_list:
-			clean_list.append(each)
-	return(sorted(clean_list))
-
 def identify_zero_count_pattern(list_data):
-	# return 3 draw set pattern that has zero occurence
+	# return 3 draw set pattern that has zero occurrence
 	list_1K_pattern = []
 	list_zero_count_pattern = []
 	for each_num in range(1000):
@@ -174,53 +113,6 @@ def identify_zero_count_pattern(list_data):
 			list_zero_count_pattern.append(each)
 
 	return list_zero_count_pattern
-
-def nr_vs_pcat_1_3drawset_count_p2excel(list_data):
-	# params: data list from txt file
-	# 1) extract 3 draw set pattern (nr vs pcat)
-	# 2) count occurrence for each 3draw set pattern
-	# 3) port the counter list to excel for future analysis
-	# 4) pcat pattern = 111,121,131,  211,221,231, 311,321,331
-
-	for pcat0 in range(1,4):
-		for pcat1 in range(1,4):
-			nr_3drawset_pattern = nr_3drawSet(list_data, pcat0, pcat1, 1)
-			nr_counter_list = counter_list_3draw(nr_3drawset_pattern)
-			sheet_name = str(pcat0) + str(pcat1) + "1"
-			port_counter_list_to_xls(nr_counter_list, sheet_name)
-
-def nr_3drawSet_dmc3d(list_data, p_cat0, p_cat1, p_cat3):
-	## 1. get data from input
-	## 2. Extract num range for 3 consecutive draws and save into a list
-	## 3. Return the list
-	max_loop_count = len(list_data) - 3
-	counter = 0
-
-	list_p1_nr_3drawSet = []
-
-	while counter <= max_loop_count:
-		num_range1 = list_data[counter][p_cat0][1]
-		num_range2 = list_data[counter + 1][p_cat1][1]
-		num_range3 = list_data[counter + 2][p_cat3][1]
-
-		list_p1_nr_3drawSet.append(num_range1+num_range2+num_range3)
-		counter += 1
-
-	return list_p1_nr_3drawSet
-
-def nr_vs_pcat_1_3drawset_count_p2excel_dmc3d(list_data):
-	# params: data list from txt file
-	# 1) extract 3 draw set pattern (nr vs pcat)
-	# 2) count occurrence for each 3draw set pattern
-	# 3) port the counter list to excel for future analysis
-	# 4) pcat pattern = 111,121,131,  211,221,231, 311,321,331
-
-	for pcat0 in range(1,4):
-		for pcat1 in range(1,4):
-			nr_3drawset_pattern = nr_3drawSet_dmc3d(list_data, pcat0, pcat1, 1)
-			nr_counter_list = counter_list_3draw(nr_3drawset_pattern)
-			sheet_name = str(pcat0) + str(pcat1) + "1"
-			port_counter_list_to_xls(nr_counter_list, sheet_name)
 
 def gen_data_list_by_day_of_week(list_data):
 	# params: data list from txt file
@@ -252,6 +144,115 @@ def gen_data_list_by_day_of_week(list_data):
 
 	return [list_wed_draw, list_sat_draw, list_sun_draw, list_other_draw]
 
+def nr_drawSet(list_data, list_pcat):
+	# params: list_data
+	# params: list_pcat - type list, containing pcat for num range
+
+	num_of_draw = len(list_pcat)
+	max_loop_count = len(list_data) - num_of_draw
+	loop_count = 0
+	return_list_nr_drawset = []
+
+	while loop_count <= max_loop_count:
+		drawset_pattern = ""
+		pcat_count = 0
+		while pcat_count < num_of_draw:
+			pcat = list_pcat[pcat_count]
+			pattern = list_data[loop_count + pcat_count][pcat][0]
+			drawset_pattern += pattern
+			pcat_count += 1
+		return_list_nr_drawset.append(drawset_pattern)
+		loop_count +=  1
+
+	return return_list_nr_drawset
+
+def nr_3drawSet(list_data, p_cat0, p_cat1, p_cat3):
+	## 1. get data from input
+	## 2. Extract num range for 3 consecutive draws and save into a list
+	## 3. Return the list
+	max_loop_count = len(list_data) - 3
+	counter = 0
+
+	list_p1_nr_3drawSet = []
+
+	while counter <= max_loop_count:
+		num_range1 = list_data[counter][p_cat0][0]
+		num_range2 = list_data[counter + 1][p_cat1][0]
+		num_range3 = list_data[counter + 2][p_cat3][0]
+
+		list_p1_nr_3drawSet.append(num_range1+num_range2+num_range3)
+		counter += 1
+
+	return list_p1_nr_3drawSet
+
+def nr_4drawSet(list_data, p_cat0, p_cat1, p_cat2, p_cat3):
+	## 1. Get data from input
+	## 2. Extract num range for 4 consecutive draws and save into a list
+	## 3. Return the list
+
+	max_loop_count = len(list_data) - 4
+	counter = 0
+
+	list_p1_nr_4drawSet = []
+
+	while counter <= max_loop_count:
+		num_range1 = list_data[counter][p_cat0][0]
+		num_range2 = list_data[counter + 1][p_cat1][0]
+		num_range3 = list_data[counter + 2][p_cat2][0]
+		num_range4 = list_data[counter + 3][p_cat3][0]
+		list_p1_nr_4drawSet.append(num_range1+num_range2+num_range3+num_range4)
+		counter += 1
+
+	return list_p1_nr_4drawSet
+
+def nr_3drawSet_dmc3d(list_data, p_cat0, p_cat1, p_cat3):
+	## 1. get data from input
+	## 2. Extract num range for 3 consecutive draws and save into a list
+	## 3. Return the list
+	max_loop_count = len(list_data) - 3
+	counter = 0
+
+	list_p1_nr_3drawSet = []
+
+	while counter <= max_loop_count:
+		num_range1 = list_data[counter][p_cat0][1]
+		num_range2 = list_data[counter + 1][p_cat1][1]
+		num_range3 = list_data[counter + 2][p_cat3][1]
+
+		list_p1_nr_3drawSet.append(num_range1+num_range2+num_range3)
+		counter += 1
+
+	return list_p1_nr_3drawSet
+
+def nr_vs_pcat_1_3drawset_count_p2excel(list_data):
+	# params: data list from txt file
+	# 1) extract 3 draw set pattern (nr vs pcat)
+	# 2) count occurrence for each 3draw set pattern
+	# 3) port the counter list to excel for future analysis
+	# 4) pcat pattern = 111,121,131,  211,221,231, 311,321,331
+
+	for pcat0 in range(1,4):
+		for pcat1 in range(1,4):
+			nr_3drawset_pattern = nr_3drawSet(list_data, pcat0, pcat1, 1)
+			nr_counter_list = counter_list_3draw(nr_3drawset_pattern)
+			sheet_name = str(pcat0) + str(pcat1) + "1"
+			port_counter_list_to_xls(nr_counter_list, sheet_name)
+
+def nr_vs_pcat_1_3drawset_count_p2excel_dmc3d(list_data):
+	# params: data list from txt file
+	# 1) extract 3 draw set pattern (nr vs pcat)
+	# 2) count occurrence for each 3draw set pattern
+	# 3) port the counter list to excel for future analysis
+	# 4) pcat pattern = 111,121,131,  211,221,231, 311,321,331
+
+	for pcat0 in range(1,4):
+		for pcat1 in range(1,4):
+			nr_3drawset_pattern = nr_3drawSet_dmc3d(list_data, pcat0, pcat1, 1)
+			nr_counter_list = counter_list_3draw(nr_3drawset_pattern)
+			sheet_name = str(pcat0) + str(pcat1) + "1"
+			port_counter_list_to_xls(nr_counter_list, sheet_name)
+
+
 ##########################################
 ##                                  RUN  CODE                                 ##
 ##########################################
@@ -273,6 +274,10 @@ save_to_file(list_data_whole_range,data_file_name)
 
 """
 
+"""
+## load data from txt file
+## separate draw data in accordance to day of week
+## save DOW data into txt file
 
 dmc_1997_01_248m_list_data = load_from_file("damacai_1997_01_248_m.txt")
 magnum_1996_01_260m_list_data = load_from_file("magnum_1996_01_260_m.txt")
@@ -282,20 +287,46 @@ dmc_1997_01_248m_list_data_DOW = gen_data_list_by_day_of_week(dmc_1997_01_248m_l
 magnum_1996_01_260m_list_data_DOW =gen_data_list_by_day_of_week(magnum_1996_01_260m_list_data)
 sportstoto_1993_01_296m_list_data_DOW =gen_data_list_by_day_of_week(sportstoto_1993_01_296m_list_data)
 
-for each in dmc_1997_01_248m_list_data_DOW:
-	print("")
-	print each
-	print("")
-	print("")
-	print("")
-	print("")
+
+save_to_file(magnum_1996_01_260m_list_data,"magnum_1996_01_260m_list_data.txt")
+save_to_file(sportstoto_1993_01_296m_list_data,"sportstoto_1993_01_296m_list_data.txt")
+save_to_file(dmc_1997_01_248m_list_data_DOW, "dmc_1997_01_248m_list_data_DOW.txt")
+save_to_file(magnum_1996_01_260m_list_data_DOW, "magnum_1996_01_260m_list_data_DOW.txt")
+save_to_file(sportstoto_1993_01_296m_list_data_DOW, "sportstoto_1993_01_296m_list_data_DOW.txt")
+"""
+
+#"""
+# This is for DOW data analysis
+# Run 3 drawset vs nr analysis and port to excel for charting
+# data_list + pcat0,pcat1,pcat2 --> nr3setdraw --> ctr_list_3draw --> port_ctr_list
 
 
+dmc_1997_01_248m_list_data = load_from_file("damacai_1997_01_248_m.txt")
+magnum_1996_01_260m_list_data = load_from_file("magnum_1996_01_260_m.txt")
+sportstoto_1993_01_296m_list_data = load_from_file("sportstoto_1993_01_296_m.txt")
 
+dmc_1997_01_248m_list_data_DOW = gen_data_list_by_day_of_week(dmc_1997_01_248m_list_data)
+magnum_1996_01_260m_list_data_DOW =gen_data_list_by_day_of_week(magnum_1996_01_260m_list_data)
+sportstoto_1993_01_296m_list_data_DOW =gen_data_list_by_day_of_week(sportstoto_1993_01_296m_list_data)
 
+dmc_1997_01_248m_list_data_DOW_wed = dmc_1997_01_248m_list_data_DOW[0]
+dmc_1997_01_248m_list_data_DOW_sat = dmc_1997_01_248m_list_data_DOW[1]
+dmc_1997_01_248m_list_data_DOW_sun = dmc_1997_01_248m_list_data_DOW[2]
+dmc_1997_01_248m_list_data_DOW_oth = dmc_1997_01_248m_list_data_DOW[3]
 
+sportstoto_1993_01_296m_list_data_DOW_wed = sportstoto_1993_01_296m_list_data_DOW[0]
+sportstoto_1993_01_296m_list_data_DOW_sat = sportstoto_1993_01_296m_list_data_DOW[1]
+sportstoto_1993_01_296m_list_data_DOW_sun = sportstoto_1993_01_296m_list_data_DOW[2]
+sportstoto_1993_01_296m_list_data_DOW_oth = sportstoto_1993_01_296m_list_data_DOW[3]
 
+magnum_1996_01_260m_list_data_DOW_wed = magnum_1996_01_260m_list_data_DOW[0]
+magnum_1996_01_260m_list_data_DOW_sat = magnum_1996_01_260m_list_data_DOW[1]
+magnum_1996_01_260m_list_data_DOW_sun = magnum_1996_01_260m_list_data_DOW[2]
+magnum_1996_01_260m_list_data_DOW_oth = magnum_1996_01_260m_list_data_DOW[3]
 
+nr_vs_pcat_1_3drawset_count_p2excel(magnum_1996_01_260m_list_data_DOW_wed)
+
+#"""
 print
 print
 print("#####################################")
