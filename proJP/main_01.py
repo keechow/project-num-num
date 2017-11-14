@@ -275,8 +275,6 @@ save_to_file(list_data_whole_range,data_file_name)
 """
 
 """
-### Load from file -> separate into DOW - > save to file###
-
 ## load data from txt file
 ## separate draw data in accordance to day of week
 ## save DOW data into txt file
@@ -297,9 +295,21 @@ save_to_file(magnum_1996_01_260m_list_data_DOW, "magnum_1996_01_260m_list_data_D
 save_to_file(sportstoto_1993_01_296m_list_data_DOW, "sportstoto_1993_01_296m_list_data_DOW.txt")
 """
 
-"""
-### Gen DOW data list -> drawsetcount p2excel ###
+#"""
+# This is for DOW data analysis
+# Run 3 drawset vs nr analysis and port to excel for charting
+# data_list + pcat0,pcat1,pcat2 --> nr3setdraw --> ctr_list_3draw --> port_ctr_list
 
+
+dmc_1997_01_248m_list_data = load_from_file("damacai_1997_01_248_m.txt")
+
+dmc_1997_01_248m_list_data_DOW = gen_data_list_by_day_of_week(dmc_1997_01_248m_list_data)
+
+nr_vs_pcat_1_3drawset_count_p2excel_dmc3d(dmc_1997_01_248m_list_data)
+
+
+
+"""
 magnum_1996_01_260m_list_data_DOW =gen_data_list_by_day_of_week(magnum_1996_01_260m_list_data)
 sportstoto_1993_01_296m_list_data_DOW =gen_data_list_by_day_of_week(sportstoto_1993_01_296m_list_data)
 
@@ -321,23 +331,7 @@ magnum_1996_01_260m_list_data_DOW_oth = magnum_1996_01_260m_list_data_DOW[3]
 
 nr_vs_pcat_1_3drawset_count_p2excel(magnum_1996_01_260m_list_data_DOW_wed)
 """
-
-"""
-# This is for DOW data analysis
-
-# Run 3 drawset vs nr analysis and port to excel for charting
-# data_list + pcat0,pcat1,pcat2 --> nr3setdraw --> ctr_list_3draw --> port_ctr_list
-
-
-dmc_1997_01_248m_list_data = load_from_file("damacai_1997_01_248_m.txt")
-
-dmc_1997_01_248m_list_data_DOW = gen_data_list_by_day_of_week(dmc_1997_01_248m_list_data)
-
-nr_vs_pcat_1_3drawset_count_p2excel_dmc3d(dmc_1997_01_248m_list_data)
-
-"""
-
-
+#"""
 print
 print
 print("#####################################")
