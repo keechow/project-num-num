@@ -252,6 +252,27 @@ def nr_vs_pcat_1_3drawset_count_p2excel_dmc3d(list_data):
 			sheet_name = str(pcat0) + str(pcat1) + "2"
 			port_counter_list_to_xls(nr_counter_list, sheet_name)
 
+def gen_pattern_given_count(list_count_data):
+	# params: list containing patter count
+    # sample of input = [6, 4, 8, 0, 3, 5, 0, 5...
+    # output = a dictionary. key = count, value = [patterns]
+	dict_counter_pattern = {}
+	counter = 0
+	while counter < len(list_count_data):
+		str_index = str(counter)
+		while (len(str_index) < 3):
+			str_index = "0" + str_index
+
+		pattern_count = list_count_data[counter]
+
+		if pattern_count in dict_counter_pattern:
+			dict_counter_pattern[pattern_count].append(str_index)
+		else:
+			dict_counter_pattern[pattern_count] = [str_index]
+		counter += 1
+
+	return dict_counter_pattern
+
 
 ##########################################
 ##                                  RUN  CODE                                 ##
@@ -338,8 +359,22 @@ nr_vs_pcat_1_3drawset_count_p2excel_dmc3d(dmc_1997_01_248m_list_data)
 """
 
 
+#Testing code for count to pattern module
+dmc_1997_01_248m_list_data = load_from_file("damacai_1997_01_248_m.txt")
+dmc_1997_01_248m_nr3drawSet = nr_3drawSet(dmc_1997_01_248m_list_data,1,1,1)
+dmc_1997_01_248m_nr3drawSet_count_list = counter_list_3draw(dmc_1997_01_248m_nr3drawSet)
+
+dmc_1997_01_248m_count_to_pattern_dict = gen_pattern_given_count(dmc_1997_01_248m_nr3drawSet_count_list)
+
+for each in dmc_1997_01_248m_count_to_pattern_dict:
+	print each, dmc_1997_01_248m_count_to_pattern_dict[each]
+
+
+
+"""
 print
 print
 print("#####################################")
 print ("#####    END OF EXECUTION       #####")
 print("#####################################")
+"""
